@@ -635,16 +635,18 @@ export function createAtlasHook(
         return
       }
 
-       const outputStr = output.output && typeof output.output === "string" ? output.output : ""
-       const isBackgroundLaunch = outputStr.includes("Background task launched") || outputStr.includes("Background task continued")
-      
+      const outputStr = output.output && typeof output.output === "string" ? output.output : ""
+      const isBackgroundLaunch =
+        outputStr.includes("Background task launched") ||
+        outputStr.includes("Background task continued")
+
       if (isBackgroundLaunch) {
         return
       }
-      
+
       if (output.output && typeof output.output === "string") {
-    const gitStats = collectGitDiffStats(ctx.directory)
-    const fileChanges = formatFileChanges(gitStats)
+        const gitStats = collectGitDiffStats(ctx.directory)
+        const fileChanges = formatFileChanges(gitStats)
         const subagentSessionId = extractSessionIdFromOutput(output.output)
 
         const boulderState = readBoulderState(ctx.directory)
